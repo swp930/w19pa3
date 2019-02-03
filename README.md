@@ -3,7 +3,7 @@ Assignment 3: Gomoku with Monte Carlo Tree Search
 
 Your task is to implement the MCTS method for playing Gomoku. The base game engine is from [here](https://github.com/HackerSir/PygameTutorials/tree/master/Lesson04/Gomoku). 
 
-Important: Your commits should be using the Github Classroom link (in a private repository), not directly cloning from the open repositiory. 
+Again, DO NOT make public forks of this repositiory. 
 
 Due date
 -----
