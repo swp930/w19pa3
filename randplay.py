@@ -1,3 +1,4 @@
+from __future__ import absolute_import, division, print_function
 import random
 
 class Randplay:
@@ -18,7 +19,7 @@ class Randplay:
                     current_pcs.append((r,c))
         #At the beginning of the game, curernt_pcs is empty
         if not current_pcs:
-            return [(self.maxrc/2, self.maxrc/2)]
+            return [(self.maxrc//2, self.maxrc//2)]
         #Reasonable moves should be close to where the current pieces are
         #Think about what these calculations are doing
         #Note: min(list, key=lambda x: x[0]) picks the element with the min value on the first dimension

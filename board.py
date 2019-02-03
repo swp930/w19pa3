@@ -7,7 +7,7 @@ class Board:
     def __init__(self):
         self.grid_size = 46
         self.start_x, self.start_y = 38, 55
-        self.edge_size = self.grid_size / 2
+        self.edge_size = self.grid_size // 2
         self.grid_count = 11
         self.piece = 'b'
         self.winner = None
