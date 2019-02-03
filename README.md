@@ -50,4 +50,4 @@ Extra credits (2 points)
 Note
 ------
 - Make sure to start early. It requires more work than Assignment 2. 
-- Check the lecture slides for details on MCTS. This [survey article](http://mcts.ai/pubs/mcts-survey-master.pdf) also has all you need to complete the assignment. 
+- Check this [survey article](http://mcts.ai/pubs/mcts-survey-master.pdf) for more info on MCTS. As mentioned above, a clean version of the pseudocode is [here](https://www.overleaf.com/read/wvmqsgrstqwg).
