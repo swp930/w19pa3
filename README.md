@@ -33,7 +33,7 @@ Note that to get any point, your code has to run smoothly in the first place.
 
 I typed out a clean version of basic MCTS [here](https://www.overleaf.com/read/wvmqsgrstqwg) You can just follow the pseudocode and can also extend it with various heuristics (e.g., in the default policy, and for proritizing the expansion for certain children nodes). Hardcoded winning moves that are not computed through MCTS will not get any point. 
 
-In MCTS, the standard loop exits when the "computation budget" is reached. Depending on how fast your code runs, you can put a bound on the number of iterations of the MCTS loop, so that each step by the MCTS takes less than roughly 10 seconds (just so that grading is not painful for us; no need to precisely keep track of time, just translate that to some suitable number of loops). 
+In MCTS, the standard loop exits when the "computation budget" is reached. Depending on how fast your code runs, you can put a bound on the number of iterations of the MCTS loop, so that each step by the MCTS takes less than roughly 15 seconds (just so that grading is not painful for us; no need to precisely keep track of time, just translate that to some suitable number of loops). 
 
 A main bottleneck of performance is how many next moves you need to consider each time. It is easy to realize that all the interesting moves should be pretty close to the pieces already on the board. Thus, to accelerate search, you could limit the next moves in a small square around where the pieces of your color are. 
 
