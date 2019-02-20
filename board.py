@@ -40,15 +40,12 @@ class Board:
         return False
     # '.' empty spot that is available to set the piece
     def set_piece(self, r, c):
-        print(r, c)
-        print(self.grid[r][c])
         if self.grid[r][c] == '.':
             self.grid[r][c] = self.piece
             if self.piece == 'b':
                 self.piece = 'w'
             else:
                 self.piece = 'b'
-            print(self.grid[r][c])
             return True
         return False
     def autoplay(self):
@@ -66,13 +63,17 @@ class Board:
             #TODO: Modify player2 to use MCTS instead of Randplay
             #player2 = Randplay(self.grid, self.piece)
             #r,c = player2.make_move()
-            player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC, self.first)
-            if(self.first):
-                self.first = False
-            r, c = player2.uct_search()
+            #player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC, self.first)
+            #if(self.first):
+            #    self.first = False
+            #r, c = player2.uct_search()
+            player1 = Randplay(self.grid, self.piece)
+            r,c = player1.make_move()
+            val = input("")
             print("Auto", self.piece, "move: (", r, ",", c, ")")
             self.set_piece(r, c)
             self.check_win(r, c)
+            val = input("")
     #Human vs computer
     def semi_autoplay(self):
         if not self.game_over:

@@ -35,6 +35,7 @@ class Gomoku():
             if e.type == KEYDOWN:
                 if e.key == K_RETURN:
                     self.auto = not self.auto
+                    print("For some reason the first two moves do not show up but the remaining moves do show up.")
                 if e.key == K_SPACE:
                     self.auto = False
                     self.board.restart()
