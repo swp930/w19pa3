@@ -16,7 +16,6 @@ class Board:
         self.winning_pos = []
         self.lastR = -1
         self.lastC = -1
-        self.first = True
         for i in range(self.grid_count):
             self.grid.append(list("." * self.grid_count))
     def handle_key_event(self, e):
@@ -32,23 +31,22 @@ class Board:
                 y = pos[1] - origin_y
                 r = int(y // self.grid_size)
                 c = int(x // self.grid_size)
-                self.lastR = r
-                self.lastC = c
                 if self.set_piece(r, c):
+                    mcts = MCTS(self.grid, self.piece, r, c)
+                    print(len(mcts.get_options(self.grid)))
+                    self.lastR = r
+                    self.lastC = c
                     self.check_win(r, c)
                     return True
         return False
     # '.' empty spot that is available to set the piece
     def set_piece(self, r, c):
-        print(r, c)
-        print(self.grid[r][c])
         if self.grid[r][c] == '.':
             self.grid[r][c] = self.piece
             if self.piece == 'b':
                 self.piece = 'w'
             else:
                 self.piece = 'b'
-            print(self.grid[r][c])
             return True
         return False
     def autoplay(self):
@@ -66,9 +64,7 @@ class Board:
             #TODO: Modify player2 to use MCTS instead of Randplay
             #player2 = Randplay(self.grid, self.piece)
             #r,c = player2.make_move()
-            player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC, self.first)
-            if(self.first):
-                self.first = False
+            player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC)
             r, c = player2.uct_search()
             print("Auto", self.piece, "move: (", r, ",", c, ")")
             self.set_piece(r, c)
@@ -77,15 +73,18 @@ class Board:
     def semi_autoplay(self):
         if not self.game_over:
         #Optional: Change this to MCTS AI and see whether you can win
-            player1 = Randplay(self.grid, self.piece)
-            r,c = player1.make_move()
-            print("Semi-Auto", self.piece, "move: (", r, ",", c, ")")
-            player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC, self.first)
-            if(self.first):
-                self.first = False
+            #player1 = Randplay(self.grid, self.piece)
+            #r,c = player1.make_move()
+            #player1.rollout_m(self.grid)
+            #player1.rollout()
+            #state = State(self.grid, self.piece, None, None, None)
+            player2 = MCTS(self.grid, self.piece, self.lastR, self.lastC)
+            #player2.simulation(state)
+            #player2.rollout_m(self.grid)
             r, c = player2.uct_search()
-            self.set_piece(r, c)
-            self.check_win(r, c)   
+            #print("Semi-Auto", self.piece, "move: (", r, ",", c, ")")
+            #self.set_piece(r, c)
+            #self.check_win(r, c)   
     #there are eight direction to check, (row, column)
     def check_win(self, r, c):
         #north direction (up)

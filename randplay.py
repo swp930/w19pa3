@@ -95,5 +95,67 @@ class Randplay:
         elif self.winner == 'w':
             simReward['b'] = 1
             simReward['w'] = 0
-        # print("Rolling out, winner is ", self.winner)
+        print("Rolling out, winner is ", self.winner)
         return simReward
+
+    def rollout_m(self, grid):
+        self.game_over = False
+        simReward = {}
+        while not self.game_over:
+            r,c = self.make_move_m(grid)
+            self.set_piece_m(grid,r,c)
+            self.check_win_m(grid,r,c)
+        #assign rewards
+        if self.winner == 'b':
+            simReward['b'] = 0
+            simReward['w'] = 1
+        elif self.winner == 'w':
+            simReward['b'] = 1
+            simReward['w'] = 0
+        print("Rolling out, winner is ", self.winner)
+        print(simReward)
+        return simReward
+
+    def get_continuous_count_m(self, grid, r, c, dr, dc):
+        piece = grid[r][c]
+        result = 0
+        i = 1
+        while True:
+            new_r = r + dr * i
+            new_c = c + dc * i
+            if 0 <= new_r < self.grid_count and 0 <= new_c < self.grid_count:
+                if grid[new_r][new_c] == piece:
+                    result += 1
+                else:
+                    break
+            else:
+                break
+            i += 1
+        return result
+
+    def set_piece_m(self, grid, r, c):
+        if grid[r][c] == '.':
+            grid[r][c] = self.piece
+            if self.piece == 'b':
+                self.piece = 'w'
+            else:
+                self.piece = 'b'
+            return True
+        return False
+
+    def check_win_m(self, grid, r, c):
+        n_count = self.get_continuous_count(r, c, -1, 0)
+        s_count = self.get_continuous_count(r, c, 1, 0)
+        e_count = self.get_continuous_count(r, c, 0, 1)
+        w_count = self.get_continuous_count(r, c, 0, -1)
+        se_count = self.get_continuous_count(r, c, 1, 1)
+        nw_count = self.get_continuous_count(r, c, -1, -1)
+        ne_count = self.get_continuous_count(r, c, -1, 1)
+        sw_count = self.get_continuous_count(r, c, 1, -1)
+        if (n_count + s_count + 1 >= 5) or (e_count + w_count + 1 >= 5) or \
+                (se_count + nw_count + 1 >= 5) or (ne_count + sw_count + 1 >= 5):
+            self.winner = self.grid[r][c]
+            self.game_over = True
+
+    def make_move_m(self, grid):
+        return random.choice(self.get_options(grid))
